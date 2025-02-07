@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Sort Numbers Without Array.sort()</h1>
+
+    <label for="inputArray">Enter numbers (comma-separated):</label>
+    <input type="text" id="inputArray" placeholder="e.g. 5, 3, 8, 1, 4">
+
+    <label for="sortOrder">Select Sort Order:</label>
+    <select id="sortOrder">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+
+    <button onclick="sortArray()">Sort Numbers</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function bubbleSort(arr, order) {
+      const n = arr.length;
+      for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - 1 - i; j++) {
+          if ((order === 'asc' && arr[j] > arr[j + 1]) || (order === 'desc' && arr[j] < arr[j + 1])) {
+            let temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+          }
+        }
+      }
+      return arr;
+    }
+
+    function sortArray() {
+      const input = document.getElementById('inputArray').value;
+      const arr = input.split(',').map(item => parseFloat(item.trim()));
+
+      const order = document.getElementById('sortOrder').value;
+
+      const sortedArray = bubbleSort(arr, order);
+
+      document.getElementById('result').innerText = `Sorted Array: ${sortedArray.join(', ')}`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2</title>
+</head>
+<body>
+  <h1>FizzBuzz Program with Custom Rules</h1>
+  <p>Enter your custom divisibility rules:</p>
+  
+  <label for="div3">Divisibility by 3:</label>
+  <input type="text" id="div3" value="Fizz">
+  <br>
+
+  <label for="div5">Divisibility by 5:</label>
+  <input type="text" id="div5" value="Buzz">
+  <br>
+
+  <label for="divBoth">Divisibility by both 3 and 5:</label>
+  <input type="text" id="divBoth" value="FizzBuzz">
+  <br><br>
+
+  <button onclick="printFizzBuzz()">Generate FizzBuzz</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function printFizzBuzz() {
+      const div3Text = document.getElementById('div3').value;
+      const div5Text = document.getElementById('div5').value;
+      const divBothText = document.getElementById('divBoth').value;
+
+      let output = "";
+      
+      for (let i = 1; i <= 50; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+          output += divBothText + "<br>"; 
+        } else if (i % 3 === 0) {
+          output += div3Text + "<br>";
+        } else if (i % 5 === 0) {
+          output += div5Text + "<br>"; 
+        } else {
+          output += i + "<br>";
+        }
+      }
+
+      document.getElementById('output').innerHTML = output;
+    }
+  </script>
+</body>
+</html>

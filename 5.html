@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Word and Character Counter</h1>
+    
+    <textarea id="inputText" placeholder="Type your text here..." oninput="updateCount()"></textarea>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function updateCount() {
+      const text = document.getElementById('inputText').value;
+
+      const numCharacters = text.length;
+
+      const words = text.trim().split(/\s+/);
+      const numWords = words.filter(word => word.length > 0).length;
+
+      const wordCounts = {};
+      words.forEach(word => {
+        word = word.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+        if (word) {
+          wordCounts[word] = (wordCounts[word] || 0) + 1;
+        }
+      });
+
+      const highlightedText = words.map(word => {
+        const cleanWord = word.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+        if (wordCounts[cleanWord] > 1) {
+          return `<span class="highlight">${word}</span>`;
+        }
+        return word;
+      }).join(' ');
+
+      document.getElementById('result').innerHTML = `
+        <p><strong>Characters (including spaces):</strong> ${numCharacters}</p>
+        <p><strong>Words:</strong> ${numWords}</p>
+        <p><strong>Text with Highlighted Repeated Words:</strong></p>
+        <p>${highlightedText}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>

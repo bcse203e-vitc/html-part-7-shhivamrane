@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Find Second and Third Largest Numbers</h1>
+
+    <label for="inputArray">Enter an array (comma-separated values):</label>
+    <input type="text" id="inputArray" placeholder="e.g. 1, 3, 5, 2, 8, 7">
+
+    <button onclick="findLargestNumbers()">Find Largest Numbers</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function findLargestNumbers() {
+      const input = document.getElementById('inputArray').value;
+      const array = input.split(',').map(item => parseInt(item.trim(), 10));
+
+      const uniqueArray = [...new Set(array)].sort((a, b) => b - a);
+
+      const secondLargest = uniqueArray[1] !== undefined ? uniqueArray[1] : 'Not enough numbers';
+      const thirdLargest = uniqueArray[2] !== undefined ? uniqueArray[2] : 'Not enough numbers';
+
+      document.getElementById('result').innerHTML = `
+        <p><strong>Second Largest Number:</strong> ${secondLargest}</p>
+        <p><strong>Third Largest Number:</strong> ${thirdLargest}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>

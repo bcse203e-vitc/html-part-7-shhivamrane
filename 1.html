@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1</title>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100. You have 5 attempts!</p>
+  <input type="number" id="userGuess" min="1" max="100" placeholder="Enter your guess" />
+  <button onclick="startGame()">Guess</button>
+  <p id="hint"></p>
+  <p id="attemptsLeft"></p>
+  <p id="message"></p>
+
+  <script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    function startGame() {
+      const userGuess = document.getElementById('userGuess').value;
+      const hint = document.getElementById('hint');
+      const attemptsLeft = document.getElementById('attemptsLeft');
+      const message = document.getElementById('message');
+
+      if (userGuess < 1 || userGuess > 100 || isNaN(userGuess)) {
+        hint.textContent = "Please enter a valid number between 1 and 100.";
+        return;
+      }
+
+      attempts++;
+      
+      if (parseInt(userGuess) === randomNumber) {
+        message.textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+        hint.textContent = '';
+      } else {
+        if (attempts < maxAttempts) {
+          if (parseInt(userGuess) < randomNumber) {
+            hint.textContent = "Too low! Try again.";
+          } else {
+            hint.textContent = "Too high! Try again.";
+          }
+          attemptsLeft.textContent = `Attempts left: ${maxAttempts - attempts}`;
+        } else {
+          hint.textContent = '';
+          attemptsLeft.textContent = '';
+          message.textContent = `Sorry, you've run out of attempts! The correct number was ${randomNumber}.`;
+        }
+      }
+
+      document.getElementById('userGuess').value = '';
+    }
+  </script>
+</body>
+</html>

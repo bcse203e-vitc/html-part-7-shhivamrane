@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Find Duplicates and Remove Them</h1>
+
+    <label for="inputArray">Enter an array (comma-separated values):</label>
+    <input type="text" id="inputArray" placeholder="e.g. 1, 2, 2, 3, 4, 4, 5">
+
+    <button onclick="findDuplicates()">Check for Duplicates</button>
+
+    <div class="result" id="result"></div>
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    function findDuplicates() {
+      const input = document.getElementById('inputArray').value;
+      const array = input.split(',').map(item => item.trim());
+
+      const duplicates = [];
+      const uniqueItems = new Set();
+
+      for (let i = 0; i < array.length; i++) {
+        if (uniqueItems.has(array[i])) {
+          if (!duplicates.includes(array[i])) {
+            duplicates.push(array[i]);
+          }
+        } else {
+          uniqueItems.add(array[i]);
+        }
+      }
+
+      const uniqueArray = [...new Set(array)];
+
+      let resultText = "Duplicates found: ";
+      resultText += duplicates.length > 0 ? duplicates.join(', ') : "None";
+
+      document.getElementById('result').innerText = resultText;
+
+      document.getElementById('output').innerHTML = `
+        <p><strong>Array with duplicates removed:</strong></p>
+        <p>${uniqueArray.join(', ')}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
